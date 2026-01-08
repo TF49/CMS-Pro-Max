@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".AddActivity.AddEducationActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="教育背景采集"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/abc_ic_ab_back_material"
+            app:navigationIconTint="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- 表单头部 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="24dp">
+                
+                <FrameLayout
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_menu_icon"
+                    android:backgroundTint="@color/menu_education">
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_education_rounded"
+                        app:tint="@color/white" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="新增教育经历"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="补全居民的学历与学位信息"
+                        android:textSize="13sp"
+                        android:textColor="@color/on_surface_variant" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/white"
+                app:strokeWidth="1dp"
+                app:strokeColor="#F0F0F0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <!-- 居民信息部分 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_resident_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="居民姓名" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_id_card"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="居民身份证号" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <AutoCompleteTextView
+                            android:id="@+id/sp_education_level"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="教育程度"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_school_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="院校名称" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_major"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="所学专业" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="16dp">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            app:boxStrokeColor="@color/outline"
+                            app:hintTextColor="@color/primary"
+                            app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_start_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="入学日期"
+                                android:focusable="false"
+                                android:clickable="true"
+                                android:cursorVisible="false" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            app:boxStrokeColor="@color/outline"
+                            app:hintTextColor="@color/primary"
+                            app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_graduation_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="毕业日期"
+                                android:focusable="false"
+                                android:clickable="true"
+                                android:cursorVisible="false" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+
+
+                    <!-- 学历状态选择 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="学历状态"
+                        android:textColor="@color/on_surface_variant"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="8dp" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+                        <RadioButton
+                            android:id="@+id/rb_studying"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="在读"
+                            android:checked="true"
+                            android:layout_marginEnd="24dp" />
+                        <RadioButton
+                            android:id="@+id/rb_graduated"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="毕业"
+                            android:layout_marginEnd="24dp" />
+                        <RadioButton
+                            android:id="@+id/rb_suspended"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="休学"
+                            android:layout_marginEnd="24dp" />
+                        <RadioButton
+                            android:id="@+id/rb_dropout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="退学" />
+                    </RadioGroup>
+
+                    <!-- 备注 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_notes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="备注信息"
+                            android:minLines="3"
+                            android:gravity="top" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="提交教育档案"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="16dp"
+                        app:backgroundTint="@color/primary"
+                        android:elevation="0dp" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:layout_marginTop="20dp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

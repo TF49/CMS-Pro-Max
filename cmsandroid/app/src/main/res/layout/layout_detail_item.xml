@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingVertical="10dp">
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="标签"
+        android:textColor="@color/on_surface_variant"
+        android:textSize="12sp"
+        android:textAllCaps="true"
+        android:letterSpacing="0.05" />
+
+    <TextView
+        android:id="@+id/value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="内容显示区域"
+        android:textColor="@color/on_surface"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/outline"
+        android:alpha="0.1"
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>

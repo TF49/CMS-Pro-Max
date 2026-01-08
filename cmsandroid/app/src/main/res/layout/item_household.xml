@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/white"
+    app:strokeWidth="1dp"
+    app:strokeColor="#F0F0F0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="24dp"
+                android:background="@color/primary"
+                android:layout_marginEnd="12dp" />
+
+            <TextView
+                android:id="@+id/tv_household_head"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="户主姓名"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/on_surface" />
+
+            <TextView
+                android:id="@+id/tv_household_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="正常"
+                android:textSize="12sp"
+                android:textColor="@color/primary"
+                android:background="@drawable/bg_welcome_toast"
+                android:backgroundTint="@color/primary_container"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/outline"
+            android:layout_marginVertical="16dp"
+            android:alpha="0.2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="户籍类型"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_household_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="农业户口"
+                    android:textColor="@color/on_surface"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="户口编号"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_household_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="1234567890"
+                    android:textColor="@color/on_surface"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="top">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="登记地址"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_register_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="北京市..."
+                    android:textColor="@color/on_surface"
+                    android:textSize="14sp"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Hidden fields for binding -->
+        <TextView android:id="@+id/tv_id" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+        <TextView android:id="@+id/tv_resident_id" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+        <TextView android:id="@+id/tv_register_date" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    tools:context=".MainActivity">
+
+    <!-- Top App Bar Content -->
+    <LinearLayout
+        android:id="@+id/header_bar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_person_rounded"
+            app:tint="@color/white" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人口普查管理系统"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/text_current_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2025-01-01 00:00:00"
+                android:textColor="#E0E0E0"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_user_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_header_user_clickable"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/tv_header_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_person_rounded"
+                app:tint="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_bar"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:gravity="center_horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="32dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#F3EDF7"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="欢迎使用"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary"
+                        android:layout_marginTop="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="全面管理户籍、居民、教育、医疗信息"
+                        android:textSize="14sp"
+                        android:textColor="@color/on_surface_variant"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="24dp" />
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="2"
+                        android:alignmentMode="alignMargins"
+                        android:columnOrderPreserved="false">
+
+                        <!-- Household Management -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_household_management"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="24dp"
+                            app:cardElevation="2dp"
+                            app:cardBackgroundColor="@color/white"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="#F0F0F0">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:padding="20dp">
+                                <FrameLayout
+                                    android:layout_width="56dp"
+                                    android:layout_height="56dp"
+                                    android:background="@drawable/bg_menu_icon"
+                                    android:backgroundTint="@color/menu_household"
+                                    android:layout_marginBottom="12dp">
+                                    <ImageView
+                                        android:layout_width="28dp"
+                                        android:layout_height="28dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_household_rounded"
+                                        app:tint="@color/white" />
+                                </FrameLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="户籍管理"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/on_surface" />
+                            </LinearLayout>
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_household_management"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:backgroundTint="@android:color/transparent"
+                                app:rippleColor="#1A000000"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Resident Management -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_resident_management"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="24dp"
+                            app:cardElevation="2dp"
+                            app:cardBackgroundColor="@color/white"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="#F0F0F0">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:padding="20dp">
+                                <FrameLayout
+                                    android:layout_width="56dp"
+                                    android:layout_height="56dp"
+                                    android:background="@drawable/bg_menu_icon"
+                                    android:backgroundTint="@color/menu_resident"
+                                    android:layout_marginBottom="12dp">
+                                    <ImageView
+                                        android:layout_width="28dp"
+                                        android:layout_height="28dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_person_rounded"
+                                        app:tint="@color/white" />
+                                </FrameLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="居民管理"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/on_surface" />
+                            </LinearLayout>
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_resident_management"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:backgroundTint="@android:color/transparent"
+                                app:rippleColor="#1A000000"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Education Management -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_education_management"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="24dp"
+                            app:cardElevation="2dp"
+                            app:cardBackgroundColor="@color/white"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="#F0F0F0">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:padding="20dp">
+                                <FrameLayout
+                                    android:layout_width="56dp"
+                                    android:layout_height="56dp"
+                                    android:background="@drawable/bg_menu_icon"
+                                    android:backgroundTint="@color/menu_education"
+                                    android:layout_marginBottom="12dp">
+                                    <ImageView
+                                        android:layout_width="28dp"
+                                        android:layout_height="28dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_education_rounded"
+                                        app:tint="@color/white" />
+                                </FrameLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="教育管理"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/on_surface" />
+                            </LinearLayout>
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_education_management"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:backgroundTint="@android:color/transparent"
+                                app:rippleColor="#1A000000"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Medical Management -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_medical_management"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="24dp"
+                            app:cardElevation="2dp"
+                            app:cardBackgroundColor="@color/white"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="#F0F0F0">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:padding="20dp">
+                                <FrameLayout
+                                    android:layout_width="56dp"
+                                    android:layout_height="56dp"
+                                    android:background="@drawable/bg_menu_icon"
+                                    android:backgroundTint="@color/menu_medical"
+                                    android:layout_marginBottom="12dp">
+                                    <ImageView
+                                        android:layout_width="28dp"
+                                        android:layout_height="28dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_hospital_rounded"
+                                        app:tint="@color/white" />
+                                </FrameLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="医疗管理"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/on_surface" />
+                            </LinearLayout>
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_medical_management"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:backgroundTint="@android:color/transparent"
+                                app:rippleColor="#1A000000"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Employment Management -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_employment_management"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="24dp"
+                            app:cardElevation="2dp"
+                            app:cardBackgroundColor="@color/white"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="#F0F0F0">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:padding="20dp">
+                                <FrameLayout
+                                    android:layout_width="56dp"
+                                    android:layout_height="56dp"
+                                    android:background="@drawable/bg_menu_icon"
+                                    android:backgroundTint="@color/menu_employment"
+                                    android:layout_marginBottom="12dp">
+                                    <ImageView
+                                        android:layout_width="28dp"
+                                        android:layout_height="28dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_employment_rounded"
+                                        app:tint="@color/white" />
+                                </FrameLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="就业管理"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/on_surface" />
+                            </LinearLayout>
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_employment_management"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:backgroundTint="@android:color/transparent"
+                                app:rippleColor="#1A000000"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Social Security Management -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_social_security_management"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="24dp"
+                            app:cardElevation="2dp"
+                            app:cardBackgroundColor="@color/white"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="#F0F0F0">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:padding="20dp">
+                                <FrameLayout
+                                    android:layout_width="56dp"
+                                    android:layout_height="56dp"
+                                    android:background="@drawable/bg_menu_icon"
+                                    android:backgroundTint="@color/menu_social_security"
+                                    android:layout_marginBottom="12dp">
+                                    <ImageView
+                                        android:layout_width="28dp"
+                                        android:layout_height="28dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_social_security_rounded"
+                                        app:tint="@color/white" />
+                                </FrameLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="社保管理"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/on_surface" />
+                            </LinearLayout>
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_social_security_management"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:backgroundTint="@android:color/transparent"
+                                app:rippleColor="#1A000000"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Vehicle Management -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_vehicle_management"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="24dp"
+                            app:cardElevation="2dp"
+                            app:cardBackgroundColor="@color/white"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="#F0F0F0">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:padding="20dp">
+                                <FrameLayout
+                                    android:layout_width="56dp"
+                                    android:layout_height="56dp"
+                                    android:background="@drawable/bg_menu_icon"
+                                    android:backgroundTint="@color/menu_vehicle"
+                                    android:layout_marginBottom="12dp">
+                                    <ImageView
+                                        android:layout_width="28dp"
+                                        android:layout_height="28dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_vehicle_rounded"
+                                        app:tint="@color/white" />
+                                </FrameLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="车辆管理"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/on_surface" />
+                            </LinearLayout>
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_vehicle_management"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:backgroundTint="@android:color/transparent"
+                                app:rippleColor="#1A000000"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Property Management -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_property_management"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="24dp"
+                            app:cardElevation="2dp"
+                            app:cardBackgroundColor="@color/white"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="#F0F0F0">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:padding="20dp">
+                                <FrameLayout
+                                    android:layout_width="56dp"
+                                    android:layout_height="56dp"
+                                    android:background="@drawable/bg_menu_icon"
+                                    android:backgroundTint="@color/menu_property"
+                                    android:layout_marginBottom="12dp">
+                                    <ImageView
+                                        android:layout_width="28dp"
+                                        android:layout_height="28dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_property_rounded"
+                                        app:tint="@color/white" />
+                                </FrameLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="房产管理"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/on_surface" />
+                            </LinearLayout>
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_property_management"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:backgroundTint="@android:color/transparent"
+                                app:rippleColor="#1A000000"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </GridLayout>
+
+
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

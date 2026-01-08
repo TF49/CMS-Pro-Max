@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cms.modules.population.mapper.VehicleMapper">
+    
+    <resultMap id="VehicleMap" type="com.example.cms.modules.population.entity.Vehicle">
+        <id property="id" column="id"/>
+        <result property="residentId" column="resident_id"/>
+        <result property="residentName" column="resident_name"/>
+        <result property="idCard" column="id_card"/>
+        <result property="licensePlate" column="license_plate"/>
+        <result property="vehicleType" column="vehicle_type"/>
+        <result property="brand" column="brand"/>
+        <result property="model" column="model"/>
+        <result property="color" column="color"/>
+        <result property="engineNumber" column="engine_number"/>
+        <result property="chassisNumber" column="chassis_number"/>
+        <result property="purchaseDate" column="purchase_date"/>
+        <result property="purchasePrice" column="purchase_price"/>
+        <result property="insuranceExpiryDate" column="insurance_expiry_date"/>
+        <result property="annualInspectionDate" column="annual_inspection_date"/>
+        <result property="notes" column="notes"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createdBy" column="created_by"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+        id, resident_id, resident_name, id_card, license_plate, vehicle_type, brand, model, color, engine_number, chassis_number, purchase_date, purchase_price, insurance_expiry_date, annual_inspection_date, notes, create_time, update_time, created_by
+    </sql>
+    
+    <select id="findAll" resultMap="VehicleMap">
+        SELECT <include refid="Base_Column_List"/> FROM vehicle
+    </select>
+    
+    <select id="findById" resultMap="VehicleMap">
+        SELECT <include refid="Base_Column_List"/> FROM vehicle WHERE id = #{id}
+    </select>
+    
+    <select id="findByResidentId" resultMap="VehicleMap">
+        SELECT <include refid="Base_Column_List"/> FROM vehicle WHERE resident_id = #{residentId}
+    </select>
+    
+    <insert id="insert">
+        INSERT INTO vehicle(id, resident_id, resident_name, id_card, license_plate, vehicle_type, brand, model, color, engine_number, chassis_number, purchase_date, purchase_price, insurance_expiry_date, annual_inspection_date, notes, create_time, update_time, created_by)
+        VALUES(#{id}, #{residentId}, #{residentName}, #{idCard}, #{licensePlate}, #{vehicleType}, #{brand}, #{model}, #{color}, #{engineNumber}, #{chassisNumber}, #{purchaseDate}, #{purchasePrice}, #{insuranceExpiryDate}, #{annualInspectionDate}, #{notes}, #{createTime}, #{updateTime}, #{createdBy})
+    </insert>
+    
+    <update id="update">
+        UPDATE vehicle SET 
+            resident_id = #{residentId},
+            resident_name = #{residentName},
+            id_card = #{idCard},
+            license_plate = #{licensePlate},
+            vehicle_type = #{vehicleType},
+            brand = #{brand},
+            model = #{model},
+            color = #{color},
+            engine_number = #{engineNumber},
+            chassis_number = #{chassisNumber},
+            purchase_date = #{purchaseDate},
+            purchase_price = #{purchasePrice},
+            insurance_expiry_date = #{insuranceExpiryDate},
+            annual_inspection_date = #{annualInspectionDate},
+            notes = #{notes},
+            update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="deleteById">
+        DELETE FROM vehicle WHERE id = #{id}
+    </delete>
+    
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM vehicle
+    </select>
+    
+    <select id="searchWithPagination" resultMap="VehicleMap">
+        SELECT <include refid="Base_Column_List"/> FROM vehicle
+        <where>
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="licensePlate != null and licensePlate != ''">
+                AND license_plate LIKE CONCAT('%', #{licensePlate}, '%')
+            </if>
+            <if test="vehicleType != null and vehicleType != ''">
+                AND vehicle_type = #{vehicleType}
+            </if>
+            <if test="brand != null and brand != ''">
+                AND brand LIKE CONCAT('%', #{brand}, '%')
+            </if>
+        </where>
+        LIMIT #{offset}, #{limit}
+    </select>
+    
+    <select id="search" resultMap="VehicleMap">
+        SELECT <include refid="Base_Column_List"/> FROM vehicle
+        <where>
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="licensePlate != null and licensePlate != ''">
+                AND license_plate LIKE CONCAT('%', #{licensePlate}, '%')
+            </if>
+            <if test="vehicleType != null and vehicleType != ''">
+                AND vehicle_type = #{vehicleType}
+            </if>
+            <if test="brand != null and brand != ''">
+                AND brand LIKE CONCAT('%', #{brand}, '%')
+            </if>
+        </where>
+    </select>
+    
+    <select id="countBySearch" resultType="int">
+        SELECT COUNT(*) FROM vehicle
+        <where>
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="licensePlate != null and licensePlate != ''">
+                AND license_plate LIKE CONCAT('%', #{licensePlate}, '%')
+            </if>
+            <if test="vehicleType != null and vehicleType != ''">
+                AND vehicle_type = #{vehicleType}
+            </if>
+            <if test="brand != null and brand != ''">
+                AND brand LIKE CONCAT('%', #{brand}, '%')
+            </if>
+        </where>
+    </select>
+    
+    <select id="searchByCreatedBy" resultMap="VehicleMap">
+        SELECT <include refid="Base_Column_List"/> FROM vehicle
+        <where>
+            created_by = #{createdBy}
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="licensePlate != null and licensePlate != ''">
+                AND license_plate LIKE CONCAT('%', #{licensePlate}, '%')
+            </if>
+            <if test="vehicleType != null and vehicleType != ''">
+                AND vehicle_type = #{vehicleType}
+            </if>
+            <if test="brand != null and brand != ''">
+                AND brand LIKE CONCAT('%', #{brand}, '%')
+            </if>
+        </where>
+        LIMIT #{offset}, #{limit}
+    </select>
+    
+    <select id="countByCreatedByAndSearch" resultType="int">
+        SELECT COUNT(*) FROM vehicle
+        <where>
+            created_by = #{createdBy}
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="licensePlate != null and licensePlate != ''">
+                AND license_plate LIKE CONCAT('%', #{licensePlate}, '%')
+            </if>
+            <if test="vehicleType != null and vehicleType != ''">
+                AND vehicle_type = #{vehicleType}
+            </if>
+            <if test="brand != null and brand != ''">
+                AND brand LIKE CONCAT('%', #{brand}, '%')
+            </if>
+        </where>
+    </select>
+    
+    <!-- 根据管理员和创建者ID及搜索条件分页搜索车辆信息 -->
+    <select id="searchByAdminOrCreatedBy" resultMap="VehicleMap">
+        SELECT <include refid="Base_Column_List"/> FROM vehicle
+        <where>
+            created_by = 1 OR created_by = #{createdBy}
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="licensePlate != null and licensePlate != ''">
+                AND license_plate LIKE CONCAT('%', #{licensePlate}, '%')
+            </if>
+            <if test="vehicleType != null and vehicleType != ''">
+                AND vehicle_type = #{vehicleType}
+            </if>
+            <if test="brand != null and brand != ''">
+                AND brand LIKE CONCAT('%', #{brand}, '%')
+            </if>
+        </where>
+        LIMIT #{offset}, #{limit}
+    </select>
+    
+    <!-- 根据管理员和创建者ID及搜索条件统计记录数 -->
+    <select id="countByAdminOrCreatedByAndSearch" resultType="int">
+        SELECT COUNT(*) FROM vehicle
+        <where>
+            created_by = 1 OR created_by = #{createdBy}
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="licensePlate != null and licensePlate != ''">
+                AND license_plate LIKE CONCAT('%', #{licensePlate}, '%')
+            </if>
+            <if test="vehicleType != null and vehicleType != ''">
+                AND vehicle_type = #{vehicleType}
+            </if>
+            <if test="brand != null and brand != ''">
+                AND brand LIKE CONCAT('%', #{brand}, '%')
+            </if>
+        </where>
+    </select>
+    
+    <!-- 获取车辆表中的全局最大ID -->
+    <select id="getMaxId" resultType="long">
+        SELECT COALESCE(MAX(id), 0) FROM vehicle
+    </select>
+    
+    <!-- 重新排序车辆记录ID，确保ID连续 -->
+    <update id="reorderIds">
+        UPDATE vehicle v
+        JOIN (
+            SELECT id, @new_id := @new_id + 1 AS new_id
+            FROM vehicle, (SELECT @new_id := 0) AS tmp
+            ORDER BY id ASC
+        ) v2 ON v.id = v2.id
+        SET v.id = v2.new_id;
+    </update>
+    
+    <!-- 根据居民ID列表和搜索条件分页查询车辆信息 -->
+    <select id="searchByResidentIdsAndSearchConditions" resultMap="VehicleMap">
+        SELECT <include refid="Base_Column_List"/> FROM vehicle
+        WHERE resident_id IN
+        <foreach collection="residentIds" item="residentId" open="(" separator="," close=")">
+            #{residentId}
+        </foreach>
+        <if test="residentName != null and residentName != ''">
+            AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+        </if>
+        <if test="licensePlate != null and licensePlate != ''">
+            AND license_plate LIKE CONCAT('%', #{licensePlate}, '%')
+        </if>
+        <if test="vehicleType != null and vehicleType != ''">
+            AND vehicle_type = #{vehicleType}
+        </if>
+        <if test="brand != null and brand != ''">
+            AND brand LIKE CONCAT('%', #{brand}, '%')
+        </if>
+        LIMIT #{offset}, #{limit}
+    </select>
+    
+    <!-- 根据居民ID列表和搜索条件统计车辆信息数量 -->
+    <select id="countByResidentIdsAndSearchConditions" resultType="int">
+        SELECT COUNT(*) FROM vehicle
+        WHERE resident_id IN
+        <foreach collection="residentIds" item="residentId" open="(" separator="," close=")">
+            #{residentId}
+        </foreach>
+        <if test="residentName != null and residentName != ''">
+            AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+        </if>
+        <if test="licensePlate != null and licensePlate != ''">
+            AND license_plate LIKE CONCAT('%', #{licensePlate}, '%')
+        </if>
+        <if test="vehicleType != null and vehicleType != ''">
+            AND vehicle_type = #{vehicleType}
+        </if>
+        <if test="brand != null and brand != ''">
+            AND brand LIKE CONCAT('%', #{brand}, '%')
+        </if>
+    </select>
+    
+</mapper>

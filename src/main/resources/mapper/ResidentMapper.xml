@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.cms.modules.population.mapper.ResidentMapper">
+
+    <resultMap id="ResidentMap" type="com.example.cms.modules.population.entity.Resident">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="idCard" column="id_card"/>
+        <result property="gender" column="gender"/>
+        <result property="birthDate" column="birth_date"/>
+        <result property="householdId" column="household_id"/>
+        <result property="relationship" column="relationship"/>
+        <result property="ethnicGroup" column="ethnic_group"/>
+        <result property="educationLevel" column="education_level"/>
+        <result property="occupation" column="occupation"/>
+        <result property="maritalStatus" column="marital_status"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="isHouseholder" column="is_householder"/>
+        <result property="notes" column="notes"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createdBy" column="created_by"/>
+    </resultMap>
+    
+    <!-- 居民关联户籍信息的结果映射 -->
+    <resultMap id="ResidentWithHouseholdMap" type="com.example.cms.modules.population.entity.Resident">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="idCard" column="id_card"/>
+        <result property="gender" column="gender"/>
+        <result property="birthDate" column="birth_date"/>
+        <result property="householdId" column="household_id"/>
+        <result property="relationship" column="relationship"/>
+        <result property="ethnicGroup" column="ethnic_group"/>
+        <result property="educationLevel" column="education_level"/>
+        <result property="occupation" column="occupation"/>
+        <result property="maritalStatus" column="marital_status"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="isHouseholder" column="is_householder"/>
+        <result property="notes" column="notes"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createdBy" column="created_by"/>
+        <!-- 添加户籍编号属性 -->
+        <result property="householdNumber" column="household_number"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="ResidentMap">
+        SELECT id, household_id, name, id_card, gender, birth_date, relationship, ethnic_group, education_level, occupation, marital_status, phone_number, is_householder, notes, create_time, update_time, created_by FROM residents
+    </select>
+
+    <select id="findById" resultMap="ResidentMap">
+        SELECT id, household_id, name, id_card, gender, birth_date, relationship, ethnic_group, education_level, occupation, marital_status, phone_number, is_householder, notes, create_time, update_time, created_by FROM residents WHERE id = #{id}
+    </select>
+    
+    <!-- 关联查询所有居民及其户籍信息 -->
+    <select id="findAllWithHouseholdInfo" resultMap="ResidentWithHouseholdMap">
+        SELECT 
+            r.id, r.household_id, r.name, r.id_card, r.gender, r.birth_date, r.relationship, 
+            r.ethnic_group, r.education_level, r.occupation, r.marital_status, r.phone_number, 
+            r.is_householder, r.notes, r.create_time, r.update_time, r.created_by,
+            h.household_number
+        FROM residents r
+        LEFT JOIN households h ON r.household_id = h.id
+    </select>
+    
+    <!-- 根据ID关联查询居民及其户籍信息 -->
+    <select id="findByIdWithHouseholdInfo" resultMap="ResidentWithHouseholdMap">
+        SELECT 
+            r.id, r.household_id, r.name, r.id_card, r.gender, r.birth_date, r.relationship, 
+            r.ethnic_group, r.education_level, r.occupation, r.marital_status, r.phone_number, 
+            r.is_householder, r.notes, r.create_time, r.update_time, r.created_by,
+            h.household_number
+        FROM residents r
+        LEFT JOIN households h ON r.household_id = h.id
+        WHERE r.id = #{id}
+    </select>
+    
+    <!-- 分页查询居民及其户籍信息 -->
+    <select id="findByPageWithHouseholdInfo" resultMap="ResidentWithHouseholdMap">
+        SELECT 
+            r.id, r.household_id, r.name, r.id_card, r.gender, r.birth_date, r.relationship, 
+            r.ethnic_group, r.education_level, r.occupation, r.marital_status, r.phone_number, 
+            r.is_householder, r.notes, r.create_time, r.update_time, r.created_by,
+            h.household_number
+        FROM residents r
+        LEFT JOIN households h ON r.household_id = h.id
+        ORDER BY r.id ASC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+    
+    <!-- 搜索居民及其户籍信息（分页） -->
+    <select id="searchWithHouseholdInfo" resultMap="ResidentWithHouseholdMap">
+        SELECT 
+            r.id, r.household_id, r.name, r.id_card, r.gender, r.birth_date, r.relationship, 
+            r.ethnic_group, r.education_level, r.occupation, r.marital_status, r.phone_number, 
+            r.is_householder, r.notes, r.create_time, r.update_time, r.created_by,
+            h.household_number
+        FROM residents r
+        LEFT JOIN households h ON r.household_id = h.id
+        <where>
+            <if test="name != null and name != ''">
+                AND r.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="idCard != null and idCard != ''">
+                AND r.id_card LIKE CONCAT('%', #{idCard}, '%')
+            </if>
+        </where>
+        ORDER BY r.id ASC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+    
+    <!-- 统计按搜索条件的居民数量 -->
+    <select id="countBySearch" resultType="int">
+        SELECT COUNT(*) 
+        FROM residents r
+        LEFT JOIN households h ON r.household_id = h.id
+        <where>
+            <if test="name != null and name != ''">
+                AND r.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="idCard != null and idCard != ''">
+                AND r.id_card LIKE CONCAT('%', #{idCard}, '%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="com.example.cms.modules.population.entity.Resident">
+        INSERT INTO residents(id, name, id_card, gender, birth_date, household_id, relationship, ethnic_group, education_level, occupation, marital_status, phone_number, is_householder, notes, created_by)
+VALUES(#{id}, #{name}, #{idCard}, #{gender}, #{birthDate}, #{householdId}, #{relationship}, #{ethnicGroup}, #{educationLevel}, #{occupation}, #{maritalStatus}, #{phoneNumber}, #{isHouseholder}, #{notes}, #{createdBy})
+    </insert>
+
+    <update id="update" parameterType="com.example.cms.modules.population.entity.Resident">
+        UPDATE residents
+        SET name=#{name}, id_card=#{idCard}, gender=#{gender}, birth_date=#{birthDate}, household_id=#{householdId}, 
+            relationship=#{relationship}, ethnic_group=#{ethnicGroup}, education_level=#{educationLevel}, occupation=#{occupation}, 
+            marital_status=#{maritalStatus}, phone_number=#{phoneNumber}, 
+            is_householder=#{isHouseholder}, notes=#{notes}, update_time=CURRENT_TIMESTAMP
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM residents WHERE id = #{id}
+    </delete>
+
+    <select id="findByName" resultMap="ResidentMap">
+        SELECT id, household_id, name, id_card, gender, birth_date, relationship, ethnic_group, education_level, occupation, marital_status, phone_number, is_householder, notes, create_time, update_time, created_by FROM residents WHERE name LIKE CONCAT('%', #{name}, '%')
+    </select>
+    
+    <select id="findByIdCard" resultMap="ResidentMap">
+        SELECT id, household_id, name, id_card, gender, birth_date, relationship, ethnic_group, education_level, occupation, marital_status, phone_number, is_householder, notes, create_time, update_time, created_by FROM residents WHERE id_card LIKE CONCAT('%', #{idCard}, '%')
+    </select>
+    
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM residents
+    </select>
+    
+    <!-- 获取居民表中的全局最大ID -->
+    <select id="getMaxId" resultType="long">
+        SELECT COALESCE(MAX(id), 0) FROM residents
+    </select>
+    
+    <!-- 根据户籍ID查询居民列表 -->
+    <select id="findByHouseholdId" resultMap="ResidentMap">
+        SELECT id, household_id, name, id_card, gender, birth_date, relationship, ethnic_group, education_level, occupation, marital_status, phone_number, is_householder, notes, create_time, update_time 
+        FROM residents 
+        WHERE household_id = #{householdId}
+    </select>
+    
+    <!-- 根据户籍ID分页查询居民列表，包含户籍信息 -->
+    <select id="findByHouseholdIdWithHouseholdInfo" resultMap="ResidentWithHouseholdMap">
+        SELECT 
+            r.id, r.household_id, r.name, r.id_card, r.gender, r.birth_date, r.relationship, 
+            r.ethnic_group, r.education_level, r.occupation, r.marital_status, r.phone_number, 
+            r.is_householder, r.notes, r.create_time, r.update_time, r.created_by,
+            h.household_number
+        FROM residents r
+        LEFT JOIN households h ON r.household_id = h.id
+        WHERE r.household_id = #{householdId}
+        ORDER BY r.id ASC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+    
+    <!-- 根据户籍ID统计居民数量 -->
+    <select id="countByHouseholdId" resultType="int">
+        SELECT COUNT(*)
+        FROM residents r
+        WHERE r.household_id = #{householdId}
+    </select>
+    
+    <!-- 重新排序居民ID，确保ID连续 -->
+    <update id="reorderIds">
+        UPDATE residents r
+        JOIN (
+            SELECT id, @new_id := @new_id + 1 AS new_id
+            FROM residents, (SELECT @new_id := 0) AS tmp
+            ORDER BY id ASC
+        ) r2 ON r.id = r2.id
+        SET r.id = r2.new_id;
+    </update>
+    
+    <!-- 根据创建者ID查询居民列表，支持分页 -->
+    <select id="findByCreatedBy" resultMap="ResidentWithHouseholdMap">
+        SELECT 
+            r.id, r.household_id, r.name, r.id_card, r.gender, r.birth_date, r.relationship, 
+            r.ethnic_group, r.education_level, r.occupation, r.marital_status, r.phone_number, 
+            r.is_householder, r.notes, r.create_time, r.update_time, r.created_by,
+            h.household_number
+        FROM residents r
+        LEFT JOIN households h ON r.household_id = h.id
+        WHERE r.created_by = #{createdBy}
+        ORDER BY r.id ASC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+    
+    <!-- 根据创建者ID统计居民数量 -->
+    <select id="countByCreatedBy" resultType="int">
+        SELECT COUNT(*)
+        FROM residents r
+        WHERE r.created_by = #{createdBy}
+    </select>
+    
+    <!-- 查询管理员和当前用户创建的居民列表，支持分页，包含户籍信息 -->
+    <select id="findByAdminOrCreatedBy" resultMap="ResidentWithHouseholdMap">
+        SELECT 
+            r.id, r.household_id, r.name, r.id_card, r.gender, r.birth_date, r.relationship, 
+            r.ethnic_group, r.education_level, r.occupation, r.marital_status, r.phone_number, 
+            r.is_householder, r.notes, r.create_time, r.update_time, r.created_by,
+            h.household_number
+        FROM residents r
+        LEFT JOIN households h ON r.household_id = h.id
+        WHERE r.created_by = 1 OR r.created_by = #{createdBy}
+        ORDER BY r.id ASC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+    
+    <!-- 统计管理员和当前用户创建的居民数量 -->
+    <select id="countByAdminOrCreatedBy" resultType="int">
+        SELECT COUNT(*)
+        FROM residents r
+        WHERE r.created_by = 1 OR r.created_by = #{createdBy}
+    </select>
+
+</mapper>

@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".AddActivity.AddMedicalActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="添加医疗记录"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/abc_ic_ab_back_material"
+            app:navigationIconTint="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#F3EDF7"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <!-- 表单头部 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="24dp">
+                        
+                        <FrameLayout
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:background="@drawable/bg_menu_icon"
+                            android:backgroundTint="@color/menu_medical">
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_hospital_rounded"
+                                app:tint="@color/white" />
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="新增医疗记录"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/primary" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="录入居民的医疗就诊信息"
+                                android:textSize="13sp"
+                                android:textColor="@color/on_surface_variant" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- 居民信息 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_resident_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="居民姓名"
+                            android:inputType="text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_id_card"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="身份证号"
+                            android:inputType="text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 就诊信息 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="就诊信息"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- 就诊类型 -->
+                    <RadioGroup
+                        android:id="@+id/rg_medical_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <RadioButton
+                            android:id="@+id/rb_visit"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="门诊"
+                            android:checked="true" />
+
+                        <RadioButton
+                            android:id="@+id/rb_hospitalization"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="住院" />
+                    </RadioGroup>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_hospital"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="医院名称"
+                            android:inputType="text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_doctor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="医生姓名"
+                            android:inputType="text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_department"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="科室"
+                            android:inputType="text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_last_checkup_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="就诊日期 (YYYY-MM-DD)"
+                            android:inputType="none"
+                            android:focusable="false"
+                            android:clickable="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_discharge_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners"
+                        android:visibility="gone">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_discharge_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="出院日期 (YYYY-MM-DD)"
+                            android:inputType="none"
+                            android:focusable="false"
+                            android:clickable="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 诊断信息 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="诊断信息"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="16dp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_diagnosis"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="诊断结果"
+                            android:inputType="text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="病情描述"
+                            android:inputType="textMultiLine"
+                            android:minLines="3" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_treatment_plan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="治疗方案"
+                            android:inputType="textMultiLine"
+                            android:minLines="3" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 费用信息 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="费用信息"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="16dp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners"
+                        app:endIconMode="dropdown_menu">
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/et_insurance_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="保险类型"
+                            android:inputType="none"
+                            android:focusable="false" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            app:boxStrokeColor="@color/outline"
+                            app:hintTextColor="@color/primary"
+                            app:boxBackgroundColor="@color/white"
+                            app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_medical_expense"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="医疗费用"
+                                android:inputType="numberDecimal" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            app:boxStrokeColor="@color/outline"
+                            app:hintTextColor="@color/primary"
+                            app:boxBackgroundColor="@color/white"
+                            app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_insurance_reimbursement"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="医保报销"
+                                android:inputType="numberDecimal" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_self_pay_amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="自费金额"
+                            android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 备注信息 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_notes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="备注信息"
+                            android:inputType="textMultiLine"
+                            android:minLines="3" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="保存医疗记录"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="8dp"
+                        app:cornerRadius="16dp"
+                        app:backgroundTint="@color/primary" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:layout_marginTop="16dp"
+                        android:indeterminateTint="@color/primary" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

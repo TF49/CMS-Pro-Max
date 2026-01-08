@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".activity.EmploymentActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="职业发展档案"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/abc_ic_ab_back_material"
+            app:navigationIconTint="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- 详情视图 -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/view_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="32dp">
+
+                <!-- 核心职业卡片 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="28dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#F1F8E9"
+                    android:layout_marginBottom="20dp"
+                    app:strokeWidth="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="24dp"
+                        android:gravity="center_vertical">
+
+                        <FrameLayout
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/bg_menu_icon"
+                            android:backgroundTint="@color/menu_employment">
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_employment_rounded"
+                                app:tint="@color/white" />
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_marginStart="20dp">
+
+                            <TextView
+                                android:id="@+id/tv_company_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="加载中..."
+                                android:textColor="@color/primary"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_job_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="职位信息加载中"
+                                android:textColor="@color/on_surface_variant"
+                                android:textSize="14sp"
+                                android:layout_marginTop="4dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 岗位详情卡片 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/white"
+                    android:layout_marginBottom="16dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#F0F0F0">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="岗位与酬劳"
+                            android:textColor="@color/primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="16dp" />
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp">
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="月薪 (元)" android:textColor="@color/on_surface_variant" android:textSize="12sp" />
+                                <TextView android:id="@+id/tv_salary" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="-" android:textColor="@color/primary" android:textSize="18sp" android:textStyle="bold" />
+                            </LinearLayout>
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="所属行业" android:textColor="@color/on_surface_variant" android:textSize="12sp" />
+                                <TextView android:id="@+id/tv_industry" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="-" android:textColor="@color/on_surface" android:textSize="15sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F8F8F8" android:layout_marginVertical="8dp" />
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="就业状态" android:textColor="@color/on_surface_variant" android:textSize="12sp" />
+                                <TextView android:id="@+id/tv_employment_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="-" android:textColor="@color/on_surface" android:textSize="15sp" />
+                            </LinearLayout>
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="入职日期" android:textColor="@color/on_surface_variant" android:textSize="12sp" />
+                                <TextView android:id="@+id/tv_entry_date" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="-" android:textColor="@color/on_surface" android:textSize="15sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 合同与所有权卡片 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/white"
+                    android:layout_marginBottom="16dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#F0F0F0">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="合同与持有人"
+                            android:textColor="@color/primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="16dp" />
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="合同类型" android:textColor="@color/on_surface_variant" android:textSize="12sp" />
+                            <TextView android:id="@+id/tv_contract_type" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="-" android:textColor="@color/on_surface" android:textSize="15sp" android:layout_marginBottom="12dp" />
+
+                            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F8F8F8" android:layout_marginBottom="12dp" />
+
+                            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="姓名" android:textColor="@color/on_surface_variant" android:textSize="12sp" />
+                                    <TextView android:id="@+id/tv_resident_name" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="-" android:textColor="@color/on_surface" android:textSize="14sp" />
+                                </LinearLayout>
+                                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.5" android:orientation="vertical">
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="身份证号" android:textColor="@color/on_surface_variant" android:textSize="12sp" />
+                                    <TextView android:id="@+id/tv_id_card" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="-" android:textColor="@color/on_surface" android:textSize="14sp" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 档案追踪卡片 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/white"
+                    android:layout_marginBottom="24dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#F0F0F0">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="档案追踪详情"
+                            android:textColor="@color/primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="12dp" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="备注说明" android:textColor="@color/on_surface_variant" android:textSize="11sp" />
+                        <TextView android:id="@+id/tv_notes" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="无" android:textColor="@color/on_surface" android:textSize="14sp" android:layout_marginTop="2dp" android:layout_marginBottom="12dp" />
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp">
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="居民索引ID" android:textColor="@color/on_surface_variant" android:textSize="11sp" />
+                                <TextView android:id="@+id/tv_resident_id" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="-" android:textColor="@color/on_surface" android:textSize="13sp" />
+                            </LinearLayout>
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="最后同步" android:textColor="@color/on_surface_variant" android:textSize="11sp" />
+                                <TextView android:id="@+id/tv_update_time" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="-" android:textColor="@color/on_surface" android:textSize="13sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="建档时间" android:textColor="@color/on_surface_variant" android:textSize="11sp" />
+                        <TextView android:id="@+id/tv_create_time" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="-" android:textColor="@color/on_surface" android:textSize="13sp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 操作按钮区域 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_edit"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:text="编辑档案"
+                        android:textSize="16sp"
+                        android:layout_marginEnd="12dp"
+                        app:cornerRadius="16dp"
+                        app:backgroundTint="@color/primary" />
+
+                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_delete"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:text="删除档案"
+                        android:textSize="16sp"
+                        app:cornerRadius="16dp"
+                        app:backgroundTint="@color/error"
+                        app:iconTint="@color/white"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- 编辑视图 -->
+        <ScrollView
+            android:id="@+id/view_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:padding="16dp">
+            
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#F1F8E9"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="修改职业背景"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary"
+                        android:layout_marginBottom="24dp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_company_name_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="工作单位/地点" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_job_title_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="职位名称" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_salary_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="薪资水平 (元)" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_industry_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="所属行业" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <AutoCompleteTextView
+                            android:id="@+id/et_employment_status_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="当前就业状态"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_entry_date_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="入职日期 (yyyy-MM-dd)" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_end_date_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="离职日期 (可空)" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <AutoCompleteTextView
+                            android:id="@+id/et_contract_type_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="合同类型"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:boxBackgroundColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_notes_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="备注信息"
+                            android:minLines="2"
+                            android:gravity="top" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_cancel"
+                            android:layout_width="0dp"
+                            android:layout_height="56dp"
+                            android:layout_weight="1"
+                            android:text="放弃修改"
+                            android:layout_marginEnd="12dp"
+                            app:cornerRadius="16dp"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_save"
+                            android:layout_width="0dp"
+                            android:layout_height="56dp"
+                            android:layout_weight="1.5"
+                            android:text="保存并应用"
+                            app:cornerRadius="16dp"
+                            app:backgroundTint="@color/primary" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </ScrollView>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

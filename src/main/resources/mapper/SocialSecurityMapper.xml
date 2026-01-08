@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cms.modules.population.mapper.SocialSecurityMapper">
+    
+    <resultMap id="SocialSecurityMap" type="com.example.cms.modules.population.entity.SocialSecurity">
+        <id property="id" column="id"/>
+        <result property="residentId" column="resident_id"/>
+        <result property="residentName" column="resident_name"/>
+        <result property="idCard" column="id_card"/>
+        <result property="pensionInsurance" column="pension_insurance"/>
+        <result property="medicalInsurance" column="medical_insurance"/>
+        <result property="unemploymentInsurance" column="unemployment_insurance"/>
+        <result property="workInjuryInsurance" column="work_injury_insurance"/>
+        <result property="maternityInsurance" column="maternity_insurance"/>
+        <result property="insuranceStatus" column="insurance_status"/>
+        <result property="paymentAmount" column="payment_amount"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="notes" column="notes"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createdBy" column="created_by"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+        id, resident_id, resident_name, id_card, pension_insurance, medical_insurance, unemployment_insurance, work_injury_insurance, maternity_insurance, insurance_status, payment_amount, start_date, end_date, notes, create_time, update_time, created_by
+    </sql>
+    
+    <select id="findAll" resultMap="SocialSecurityMap">
+        SELECT <include refid="Base_Column_List"/> FROM social_security
+    </select>
+    
+    <select id="findById" resultMap="SocialSecurityMap">
+        SELECT <include refid="Base_Column_List"/> FROM social_security WHERE id = #{id}
+    </select>
+    
+    <select id="findByResidentId" resultMap="SocialSecurityMap">
+        SELECT <include refid="Base_Column_List"/> FROM social_security WHERE resident_id = #{residentId}
+    </select>
+    
+    <insert id="insert">
+        INSERT INTO social_security(id, resident_id, resident_name, id_card, pension_insurance, medical_insurance, unemployment_insurance, work_injury_insurance, maternity_insurance, insurance_status, payment_amount, start_date, end_date, notes, create_time, update_time, created_by)
+        VALUES(#{id}, #{residentId}, #{residentName}, #{idCard}, #{pensionInsurance}, #{medicalInsurance}, #{unemploymentInsurance}, #{workInjuryInsurance}, #{maternityInsurance}, #{insuranceStatus}, #{paymentAmount}, #{startDate}, #{endDate}, #{notes}, #{createTime}, #{updateTime}, #{createdBy})
+    </insert>
+    
+    <update id="update">
+        UPDATE social_security SET 
+            resident_id = #{residentId},
+            resident_name = #{residentName},
+            id_card = #{idCard},
+            pension_insurance = #{pensionInsurance},
+            medical_insurance = #{medicalInsurance},
+            unemployment_insurance = #{unemploymentInsurance},
+            work_injury_insurance = #{workInjuryInsurance},
+            maternity_insurance = #{maternityInsurance},
+            insurance_status = #{insuranceStatus},
+            payment_amount = #{paymentAmount},
+            start_date = #{startDate},
+            end_date = #{endDate},
+            notes = #{notes},
+            update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="deleteById">
+        DELETE FROM social_security WHERE id = #{id}
+    </delete>
+    
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM social_security
+    </select>
+    
+    <select id="search" resultMap="SocialSecurityMap">
+        SELECT <include refid="Base_Column_List"/> FROM social_security
+        <where>
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="idCard != null and idCard != ''">
+                AND id_card = #{idCard}
+            </if>
+            <if test="insuranceStatus != null and insuranceStatus != ''">
+                AND insurance_status = #{insuranceStatus}
+            </if>
+            <if test="pensionInsurance != null and pensionInsurance != ''">
+                AND pension_insurance = #{pensionInsurance}
+            </if>
+            <if test="medicalInsurance != null and medicalInsurance != ''">
+                AND medical_insurance = #{medicalInsurance}
+            </if>
+        </where>
+    </select>
+    
+    <select id="searchWithPagination" resultMap="SocialSecurityMap">
+        SELECT <include refid="Base_Column_List"/> FROM social_security
+        <where>
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="idCard != null and idCard != ''">
+                AND id_card = #{idCard}
+            </if>
+            <if test="insuranceStatus != null and insuranceStatus != ''">
+                AND insurance_status = #{insuranceStatus}
+            </if>
+            <if test="pensionInsurance != null and pensionInsurance != ''">
+                AND pension_insurance = #{pensionInsurance}
+            </if>
+            <if test="medicalInsurance != null and medicalInsurance != ''">
+                AND medical_insurance = #{medicalInsurance}
+            </if>
+        </where>
+        LIMIT #{offset}, #{size}
+    </select>
+    
+    <select id="countBySearch" resultType="int">
+        SELECT COUNT(*) FROM social_security
+        <where>
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="idCard != null and idCard != ''">
+                AND id_card = #{idCard}
+            </if>
+            <if test="insuranceStatus != null and insuranceStatus != ''">
+                AND insurance_status = #{insuranceStatus}
+            </if>
+            <if test="pensionInsurance != null and pensionInsurance != ''">
+                AND pension_insurance = #{pensionInsurance}
+            </if>
+            <if test="medicalInsurance != null and medicalInsurance != ''">
+                AND medical_insurance = #{medicalInsurance}
+            </if>
+        </where>
+    </select>
+    
+    <select id="searchByCreatedBy" resultMap="SocialSecurityMap">
+        SELECT <include refid="Base_Column_List"/> FROM social_security
+        <where>
+            created_by = #{createdBy}
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="idCard != null and idCard != ''">
+                AND id_card = #{idCard}
+            </if>
+            <if test="insuranceStatus != null and insuranceStatus != ''">
+                AND insurance_status = #{insuranceStatus}
+            </if>
+            <if test="pensionInsurance != null and pensionInsurance != ''">
+                AND pension_insurance = #{pensionInsurance}
+            </if>
+            <if test="medicalInsurance != null and medicalInsurance != ''">
+                AND medical_insurance = #{medicalInsurance}
+            </if>
+        </where>
+        LIMIT #{offset}, #{size}
+    </select>
+    
+    <select id="countByCreatedByAndSearch" resultType="int">
+        SELECT COUNT(*) FROM social_security
+        <where>
+            created_by = #{createdBy}
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="idCard != null and idCard != ''">
+                AND id_card = #{idCard}
+            </if>
+            <if test="insuranceStatus != null and insuranceStatus != ''">
+                AND insurance_status = #{insuranceStatus}
+            </if>
+            <if test="pensionInsurance != null and pensionInsurance != ''">
+                AND pension_insurance = #{pensionInsurance}
+            </if>
+            <if test="medicalInsurance != null and medicalInsurance != ''">
+                AND medical_insurance = #{medicalInsurance}
+            </if>
+        </where>
+    </select>
+    
+    <!-- 根据管理员和创建者ID及搜索条件分页搜索社保信息 -->
+    <select id="searchByAdminOrCreatedBy" resultMap="SocialSecurityMap">
+        SELECT <include refid="Base_Column_List"/> FROM social_security
+        <where>
+            (created_by = 1 OR created_by = #{createdBy})
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="idCard != null and idCard != ''">
+                AND id_card = #{idCard}
+            </if>
+            <if test="insuranceStatus != null and insuranceStatus != ''">
+                AND insurance_status = #{insuranceStatus}
+            </if>
+            <if test="pensionInsurance != null and pensionInsurance != ''">
+                AND pension_insurance = #{pensionInsurance}
+            </if>
+            <if test="medicalInsurance != null and medicalInsurance != ''">
+                AND medical_insurance = #{medicalInsurance}
+            </if>
+        </where>
+        LIMIT #{offset}, #{size}
+    </select>
+    
+    <!-- 根据管理员和创建者ID及搜索条件统计记录数 -->
+    <select id="countByAdminOrCreatedByAndSearch" resultType="int">
+        SELECT COUNT(*) FROM social_security
+        <where>
+            (created_by = 1 OR created_by = #{createdBy})
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="idCard != null and idCard != ''">
+                AND id_card = #{idCard}
+            </if>
+            <if test="insuranceStatus != null and insuranceStatus != ''">
+                AND insurance_status = #{insuranceStatus}
+            </if>
+            <if test="pensionInsurance != null and pensionInsurance != ''">
+                AND pension_insurance = #{pensionInsurance}
+            </if>
+            <if test="medicalInsurance != null and medicalInsurance != ''">
+                AND medical_insurance = #{medicalInsurance}
+            </if>
+        </where>
+    </select>
+    
+    <!-- 获取社保表中的全局最大ID -->
+    <select id="getMaxId" resultType="long">
+        SELECT COALESCE(MAX(id), 0) FROM social_security
+    </select>
+    
+    <!-- 重新排序社保记录ID，确保ID连续 -->
+    <update id="reorderIds">
+        UPDATE social_security s
+        JOIN (
+            SELECT id, @new_id := @new_id + 1 AS new_id
+            FROM social_security, (SELECT @new_id := 0) AS tmp
+            ORDER BY id ASC
+        ) s2 ON s.id = s2.id
+        SET s.id = s2.new_id;
+    </update>
+    
+    <!-- 根据身份证号查询社保记录 -->
+    <select id="findByIdCard" resultMap="SocialSecurityMap">
+        SELECT <include refid="Base_Column_List"/> FROM social_security WHERE id_card = #{idCard}
+    </select>
+    
+    <!-- 根据居民ID列表和搜索条件分页查询社保信息 -->
+    <select id="searchByResidentIdsAndSearchConditions" resultMap="SocialSecurityMap">
+        SELECT <include refid="Base_Column_List"/> FROM social_security
+        WHERE resident_id IN
+        <foreach collection="residentIds" item="residentId" open="(" separator="," close=")">
+            #{residentId}
+        </foreach>
+        <if test="residentName != null and residentName != ''">
+            AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+        </if>
+        <if test="idCard != null and idCard != ''">
+            AND id_card = #{idCard}
+        </if>
+        <if test="insuranceStatus != null and insuranceStatus != ''">
+            AND insurance_status = #{insuranceStatus}
+        </if>
+        <if test="pensionInsurance != null and pensionInsurance != ''">
+            AND pension_insurance = #{pensionInsurance}
+        </if>
+        <if test="medicalInsurance != null and medicalInsurance != ''">
+            AND medical_insurance = #{medicalInsurance}
+        </if>
+        LIMIT #{offset}, #{size}
+    </select>
+    
+    <!-- 根据居民ID列表和搜索条件统计社保信息数量 -->
+    <select id="countByResidentIdsAndSearchConditions" resultType="int">
+        SELECT COUNT(*) FROM social_security
+        WHERE resident_id IN
+        <foreach collection="residentIds" item="residentId" open="(" separator="," close=")">
+            #{residentId}
+        </foreach>
+        <if test="residentName != null and residentName != ''">
+            AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+        </if>
+        <if test="idCard != null and idCard != ''">
+            AND id_card = #{idCard}
+        </if>
+        <if test="insuranceStatus != null and insuranceStatus != ''">
+            AND insurance_status = #{insuranceStatus}
+        </if>
+        <if test="pensionInsurance != null and pensionInsurance != ''">
+            AND pension_insurance = #{pensionInsurance}
+        </if>
+        <if test="medicalInsurance != null and medicalInsurance != ''">
+            AND medical_insurance = #{medicalInsurance}
+        </if>
+    </select>
+</mapper>

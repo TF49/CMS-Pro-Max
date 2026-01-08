@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".AddActivity.AddSocialSecurityActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="社保档案登记"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/abc_ic_ab_back_material"
+            app:navigationIconTint="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- 表单头部 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="24dp">
+                
+                <FrameLayout
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_menu_icon"
+                    android:backgroundTint="@color/menu_social_security">
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_social_security_rounded"
+                        app:tint="@color/white" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="新增社保资料"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="登记居民的社会保险参保信息"
+                        android:textSize="13sp"
+                        android:textColor="@color/on_surface_variant" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/white"
+                app:strokeWidth="1dp"
+                app:strokeColor="#F0F0F0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_resident_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="居民姓名" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_id_card"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="身份证号码" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_payment_amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="缴费金额 (元)"
+                            android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="16dp">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            app:boxStrokeColor="@color/outline"
+                            app:hintTextColor="@color/primary"
+                            app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_start_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="参保日期 (yyyy-MM-dd)" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            app:boxStrokeColor="@color/outline"
+                            app:hintTextColor="@color/primary"
+                            app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_end_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="停保日期 (yyyy-MM-dd)" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_notes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="备注信息" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 养老保险 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/et_pension_insurance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="养老保险"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 医疗保险 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/et_medical_insurance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="医疗保险"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 失业保险 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/et_unemployment_insurance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="失业保险"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 工伤保险 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/et_work_injury_insurance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="工伤保险"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 生育保险 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/et_maternity_insurance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="生育保险"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 参保状态 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:boxStrokeColor="@color/outline"
+                        app:hintTextColor="@color/primary"
+                        app:shapeAppearanceOverlay="@style/TextFieldRoundedCorners">
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/et_insurance_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="当前参保状态"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="存入社保档案库"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="16dp"
+                        app:backgroundTint="@color/primary"
+                        android:elevation="0dp" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:layout_marginTop="20dp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 添加网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/ic_login"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_login"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Cmsandroid"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+            
+        <activity
+            android:name=".ListActivity.ResidentListActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".AddActivity.AddResidentActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".ListActivity.HouseholdListActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".AddActivity.AddHouseholdActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ListActivity.EducationListActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".AddActivity.AddEducationActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ListActivity.EmploymentListActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".AddActivity.AddEmploymentActivity"
+            android:exported="false"
+            tools:targetApi="26" />
+
+        <activity
+            android:name=".ListActivity.MedicalListActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".AddActivity.AddMedicalActivity"
+            android:exported="false"
+            tools:targetApi="26" />
+
+        <activity
+            android:name=".ListActivity.SocialSecurityListActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".AddActivity.AddSocialSecurityActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ListActivity.VehicleListActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".AddActivity.AddVehicleActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ListActivity.PropertyListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AddActivity.AddPropertyActivity"
+            android:exported="false"
+            tools:targetApi="26" />
+            
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".activity.ForgotPasswordActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".activity.HouseholdActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".activity.ResidentActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".activity.EducationActivity"
+            android:exported="false"
+            tools:targetApi="26" />
+            
+        <activity
+            android:name=".activity.EmploymentActivity"
+            android:exported="false"
+            tools:targetApi="26" />
+            
+        <activity
+            android:name=".activity.MedicalActivity"
+            android:exported="false"
+            tools:targetApi="26" />
+            
+        <activity
+            android:name=".activity.SocialSecurityActivity"
+            android:exported="false"
+            tools:targetApi="26" />
+            
+        <activity
+            android:name=".activity.VehicleActivity"
+            android:exported="false"
+            tools:targetApi="26" />
+            
+        <activity
+            android:name=".activity.PropertyActivity"
+            android:exported="false"
+            tools:targetApi="26" />
+
+        <activity
+            android:name=".activity.UserProfileActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>

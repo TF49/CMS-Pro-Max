@@ -1,0 +1,6 @@
+node_modules/
+miniprogram_npm/
+unpackage/
+project.private.config.json
+.DS_Store
+*.log

@@ -1,0 +1,220 @@
+/* 公共响应式样式 */
+
+/* 小屏幕设备 */
+@media (max-width: 768px) {
+  /* 通用容器样式 */
+  .common-container {
+    padding: 10px;
+  }
+
+  /* 表格通用样式 */
+  .common-table {
+    font-size: 12px;
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+
+  .common-table :deep(.el-table__header-wrapper) {
+    width: 100%;
+  }
+
+  .common-table :deep(.el-table__body-wrapper) {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .common-table :deep(.el-table__cell) {
+    padding: 6px 4px;
+    font-size: 12px;
+    min-width: 80px;
+  }
+
+  /* 操作按钮样式 */
+  .operation-buttons {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .operation-buttons .el-button {
+    width: 100%;
+    padding: 4px 8px;
+    font-size: 11px;
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  /* 搜索栏样式 */
+  .search-bar {
+    padding: 10px;
+  }
+
+  .search-form .el-form-item {
+    margin-bottom: 15px;
+  }
+
+  /* 分页样式 */
+  .pagination-container {
+    padding: 10px;
+    overflow-x: auto;
+  }
+
+  .pagination-container :deep(.el-pagination) {
+    white-space: nowrap;
+  }
+
+  /* 对话框样式 */
+  .el-dialog {
+    width: 90% !important;
+    max-width: 500px;
+  }
+
+  .el-dialog__header {
+    padding: 15px 20px 10px;
+  }
+
+  .el-dialog__body {
+    padding: 15px 20px;
+  }
+
+  /* 表单样式 */
+  .el-form-item {
+    margin-bottom: 15px;
+  }
+
+  .el-form-item__label {
+    font-size: 13px;
+    padding: 0 10px 0 0;
+  }
+
+  /* 按钮组样式 */
+  .header-buttons {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* 卡片样式 */
+  .el-card {
+    margin-bottom: 10px;
+  }
+
+  /* 菜单折叠适配 */
+  .el-aside.is-collapsed + .el-container .el-header {
+    padding-left: 20px;
+  }
+
+  .el-aside.is-collapsed + .el-container .el-main {
+    padding-left: 20px;
+  }
+
+  /* 数据显示样式 */
+  .data-info {
+    font-size: 12px;
+  }
+
+  /* 确保表格内容不会溢出 */
+  .common-table :deep(.el-table) {
+    display: block;
+    overflow-x: auto;
+  }
+
+  /* 优化标签显示 */
+  .el-tag {
+    padding: 2px 8px;
+    font-size: 11px;
+  }
+
+  /* 优化头像显示 */
+  .el-avatar {
+    width: 30px !important;
+    height: 30px !important;
+    line-height: 30px !important;
+  }
+
+  /* 优化面包屑导航 */
+  .el-breadcrumb {
+    font-size: 12px;
+  }
+}
+
+/* 平板设备 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .common-container {
+    padding: 15px;
+  }
+
+  .common-table {
+    font-size: 13px;
+  }
+
+  .operation-buttons {
+    gap: 8px;
+  }
+
+  .operation-buttons .el-button {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
+
+/* 大屏幕设备 */
+@media (min-width: 1025px) {
+  .common-container {
+    padding: 20px;
+  }
+
+  .content-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+/* 确保表格内容完整显示的全局样式 */
+.el-table {
+  min-width: 100%;
+}
+
+/* 确保分页功能在各种屏幕尺寸下正常工作 */
+.el-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 防止内容溢出容器 */
+.common-table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+/* 确保操作列在小屏幕上仍然可用 */
+.operation-col {
+  min-width: 120px;
+}
+
+/* 适配表格列的宽度 */
+.col-auto {
+  width: auto;
+  min-width: 80px;
+}
+
+/* 滚动条样式优化 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

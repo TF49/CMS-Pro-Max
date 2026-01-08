@@ -1,0 +1,250 @@
+/* 响应式设计工具类 */
+
+/* 基础响应式变量 */
+:root {
+  --base-font-size: 28rpx;
+  --base-spacing: 20rpx;
+  --base-border-radius: 8rpx;
+}
+
+/* 小屏设备适配 (<= 375px) */
+@media (max-width: 375px) {
+  :root {
+    --base-font-size: 26rpx;
+    --base-spacing: 16rpx;
+  }
+  
+  /* 通用字体大小调整 */
+  .responsive-text-small {
+    font-size: 24rpx !important;
+  }
+  
+  .responsive-text-normal {
+    font-size: 26rpx !important;
+  }
+  
+  .responsive-text-large {
+    font-size: 28rpx !important;
+  }
+  
+  .responsive-text-title {
+    font-size: 30rpx !important;
+  }
+  
+  /* 通用间距调整 */
+  .responsive-padding {
+    padding: 16rpx !important;
+  }
+  
+  .responsive-margin {
+    margin: 16rpx !important;
+  }
+  
+  /* 布局调整 */
+  .responsive-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .responsive-flex {
+    flex-direction: column !important;
+  }
+}
+
+/* 中屏设备适配 (376px - 414px) */
+@media (min-width: 376px) and (max-width: 414px) {
+  :root {
+    --base-font-size: 28rpx;
+    --base-spacing: 20rpx;
+  }
+  
+  .responsive-text-small {
+    font-size: 26rpx !important;
+  }
+  
+  .responsive-text-normal {
+    font-size: 28rpx !important;
+  }
+  
+  .responsive-text-large {
+    font-size: 30rpx !important;
+  }
+  
+  .responsive-text-title {
+    font-size: 32rpx !important;
+  }
+}
+
+/* 大屏设备适配 (> 414px) */
+@media (min-width: 415px) {
+  :root {
+    --base-font-size: 30rpx;
+    --base-spacing: 24rpx;
+  }
+  
+  .responsive-text-small {
+    font-size: 28rpx !important;
+  }
+  
+  .responsive-text-normal {
+    font-size: 30rpx !important;
+  }
+  
+  .responsive-text-large {
+    font-size: 32rpx !important;
+  }
+  
+  .responsive-text-title {
+    font-size: 36rpx !important;
+  }
+  
+  .responsive-padding {
+    padding: 24rpx !important;
+  }
+  
+  .responsive-margin {
+    margin: 24rpx !important;
+  }
+}
+
+/* 横屏适配 */
+@media (orientation: landscape) {
+  .responsive-landscape-hide {
+    display: none !important;
+  }
+  
+  .responsive-landscape-flex {
+    flex-direction: row !important;
+  }
+}
+
+/* 竖屏适配 */
+@media (orientation: portrait) {
+  .responsive-portrait-hide {
+    display: none !important;
+  }
+  
+  .responsive-portrait-flex {
+    flex-direction: column !important;
+  }
+}
+
+/* 通用响应式工具类 */
+.responsive-container {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.responsive-full-width {
+  width: 100% !important;
+}
+
+.responsive-full-height {
+  height: 100% !important;
+}
+
+/* 响应式图片 */
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 响应式按钮 */
+.responsive-button {
+  min-width: 120rpx;
+  padding: 20rpx 30rpx;
+  font-size: var(--base-font-size);
+}
+
+@media (max-width: 375px) {
+  .responsive-button {
+    min-width: 100rpx;
+    padding: 16rpx 24rpx;
+    font-size: 26rpx;
+  }
+}
+
+/* 响应式卡片 */
+.responsive-card {
+  padding: var(--base-spacing);
+  border-radius: var(--base-border-radius);
+  box-sizing: border-box;
+}
+
+/* 响应式列表项 */
+.responsive-list-item {
+  padding: var(--base-spacing);
+  min-height: 80rpx;
+}
+
+@media (max-width: 375px) {
+  .responsive-list-item {
+    padding: 16rpx;
+    min-height: 70rpx;
+  }
+}
+
+/* 响应式输入框 */
+.responsive-input {
+  font-size: var(--base-font-size);
+  padding: 16rpx 20rpx;
+  min-height: 70rpx;
+}
+
+@media (max-width: 375px) {
+  .responsive-input {
+    font-size: 26rpx;
+    padding: 14rpx 18rpx;
+    min-height: 65rpx;
+  }
+}
+
+/* 响应式表格 */
+.responsive-table {
+  width: 100%;
+  font-size: var(--base-font-size);
+}
+
+@media (max-width: 375px) {
+  .responsive-table {
+    font-size: 24rpx;
+  }
+}
+
+/* 响应式网格布局 */
+.responsive-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--base-spacing);
+}
+
+.responsive-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--base-spacing);
+}
+
+.responsive-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--base-spacing);
+}
+
+@media (max-width: 375px) {
+  .responsive-grid-2,
+  .responsive-grid-3,
+  .responsive-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 414px) {
+  .responsive-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .responsive-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+

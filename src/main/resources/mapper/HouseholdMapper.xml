@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.cms.modules.population.mapper.HouseholdMapper">
+
+    <resultMap id="HouseholdMap" type="com.example.cms.modules.population.entity.Household">
+        <id property="id" column="id"/>
+        <result property="householdNumber" column="household_number"/>
+        <result property="address" column="address"/>
+        <result property="householderName" column="householder_name"/>
+        <result property="householderIdCard" column="householder_id_card"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="registrationDate" column="registration_date" jdbcType="VARCHAR"/>
+        <result property="populationCount" column="population_count"/>
+        <result property="notes" column="notes"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="HouseholdMap">
+        SELECT id, household_number, address, householder_name, householder_id_card, phone_number, registration_date, population_count, notes, create_time, update_time, created_by
+        FROM households 
+        ORDER BY id ASC
+    </select>
+
+    <select id="findById" resultMap="HouseholdMap">
+        SELECT id, household_number, address, householder_name, householder_id_card, phone_number, registration_date, population_count, notes, create_time, update_time, created_by
+        FROM households 
+        WHERE id = #{id}
+    </select>
+    
+    <select id="findByHouseholdNumber" resultMap="HouseholdMap">
+        SELECT id, household_number, address, householder_name, householder_id_card, phone_number, registration_date, population_count, notes, create_time, update_time, created_by
+        FROM households 
+        WHERE household_number = #{householdNumber}
+    </select>
+    
+    <!-- 获取户籍表中的全局最大ID -->
+    <select id="getMaxId" resultType="int">
+        SELECT COALESCE(MAX(id), 0) FROM households
+    </select>
+    
+    <!-- 分页查询 -->
+    <select id="findByPage" resultMap="HouseholdMap">
+        SELECT id, household_number, address, householder_name, householder_id_card, phone_number, registration_date, population_count, notes, create_time, update_time, created_by
+        FROM households 
+        ORDER BY id ASC
+        LIMIT #{offset}, #{limit}
+    </select>
+    
+    <!-- 获取下一个可用的户籍编号 -->
+    <select id="getNextHouseholdNumber" resultType="string">
+        SELECT COALESCE(MAX(CAST(household_number AS UNSIGNED)) + 1, 1) FROM households
+    </select>
+    
+    <insert id="insert" parameterType="com.example.cms.modules.population.entity.Household">
+        INSERT INTO households(id, household_number, address, householder_name, householder_id_card, phone_number, registration_date, population_count, notes, create_time, update_time, created_by)
+        VALUES(#{id}, #{householdNumber}, #{address}, #{householderName}, #{householderIdCard}, #{phoneNumber}, #{registrationDate, jdbcType=VARCHAR}, #{populationCount}, #{notes}, #{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}, #{createdBy})
+    </insert>
+
+    <update id="update" parameterType="com.example.cms.modules.population.entity.Household">
+        UPDATE households
+        SET household_number=#{householdNumber}, address=#{address}, householder_name=#{householderName}, householder_id_card=#{householderIdCard}, 
+            phone_number=#{phoneNumber}, registration_date=#{registrationDate, jdbcType=VARCHAR}, population_count=#{populationCount}, notes=#{notes}, update_time=#{updateTime, jdbcType=TIMESTAMP}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM households WHERE id = #{id}
+    </delete>
+
+    <select id="findByHouseholderName" resultMap="HouseholdMap">
+        SELECT id, household_number, address, householder_name, householder_id_card, phone_number, registration_date, population_count, notes, create_time, update_time, created_by
+        FROM households 
+        WHERE householder_name LIKE CONCAT('%', #{name}, '%')
+    </select>
+    
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM households
+    </select>
+    
+    <!-- 根据创建者ID查询户籍列表，支持分页 -->
+    <select id="findByCreatedBy" resultMap="HouseholdMap">
+        SELECT id, household_number, address, householder_name, householder_id_card, phone_number, registration_date, population_count, notes, create_time, update_time 
+        FROM households 
+        WHERE created_by = #{createdBy}
+        ORDER BY id ASC
+        LIMIT #{offset}, #{limit}
+    </select>
+    
+    <!-- 根据创建者ID统计户籍数量 -->
+    <select id="countByCreatedBy" resultType="int">
+        SELECT COUNT(*) FROM households 
+        WHERE created_by = #{createdBy}
+    </select>
+    
+    <!-- 查询管理员和当前用户创建的户籍列表，支持分页 -->
+    <select id="findByAdminOrCreatedBy" resultMap="HouseholdMap">
+        SELECT id, household_number, address, householder_name, householder_id_card, phone_number, registration_date, population_count, notes, create_time, update_time, created_by
+        FROM households 
+        WHERE created_by = 1 OR created_by = #{createdBy}
+        ORDER BY id ASC
+        LIMIT #{offset}, #{limit}
+    </select>
+    
+    <!-- 统计管理员和当前用户创建的户籍数量 -->
+    <select id="countByAdminOrCreatedBy" resultType="int">
+        SELECT COUNT(*) FROM households 
+        WHERE created_by = 1 OR created_by = #{createdBy}
+    </select>
+    
+    <!-- 重新排序户籍ID，确保ID连续 -->
+    <update id="reorderIds">
+        UPDATE households h
+        JOIN (
+            SELECT id, @new_id := @new_id + 1 AS new_id
+            FROM households, (SELECT @new_id := 0) t
+            ORDER BY id ASC
+        ) ordered ON h.id = ordered.id
+        SET h.id = ordered.new_id;
+    </update>
+
+</mapper>

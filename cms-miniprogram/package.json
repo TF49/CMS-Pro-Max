@@ -1,0 +1,22 @@
+{
+  "name": "cms-miniprogram",
+  "version": "1.0.0",
+  "description": "CMS微信小程序",
+  "main": "main.js",
+  "scripts": {
+    "dev:mp-weixin": "uni -p mp-weixin",
+    "build:mp-weixin": "uni build -p mp-weixin"
+  },
+  "dependencies": {
+    "@dcloudio/uni-app": "^3.0.0-alpha.40807",
+    "@dcloudio/uni-ui": "^1.4.24",
+    "sockjs-client": "^1.6.1",
+    "stompjs": "^2.3.3",
+    "vue": "^3.5.24"
+  },
+  "devDependencies": {
+    "@dcloudio/types": "^3.0.0",
+    "@vue/compiler-sfc": "^3.5.24",
+    "typescript": "^5.9.3"
+  }
+}

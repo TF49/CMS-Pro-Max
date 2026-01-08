@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.cms.modules.population.mapper.EducationMapper">
+
+    <resultMap id="EducationMap" type="com.example.cms.modules.population.entity.Education">
+        <id property="id" column="id"/>
+        <result property="residentId" column="resident_id"/>
+        <result property="residentName" column="resident_name"/>
+        <result property="idCard" column="id_card"/>
+        <result property="schoolName" column="school_name"/>
+        <result property="educationLevel" column="education_level"/>
+        <result property="major" column="major"/>
+        <result property="enrollmentDate" column="enrollment_date"/>
+        <result property="graduationDate" column="graduation_date"/>
+        <result property="status" column="status"/>
+        <result property="notes" column="notes"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createdBy" column="created_by"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="EducationMap">
+        SELECT * FROM education ORDER BY id ASC
+    </select>
+    
+    <select id="findAllWithPagination" resultMap="EducationMap">
+        SELECT * FROM education ORDER BY id ASC
+        <if test="size != null">
+            LIMIT #{size} OFFSET #{offset}
+        </if>
+    </select>
+
+    <select id="findById" resultMap="EducationMap">
+        SELECT * FROM education WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.example.cms.modules.population.entity.Education">
+        INSERT INTO education(id, resident_id, resident_name, id_card, school_name, education_level, major, enrollment_date, graduation_date, status, notes, create_time, update_time, created_by)
+        VALUES(#{id}, #{residentId}, #{residentName}, #{idCard}, #{schoolName}, #{educationLevel}, #{major}, #{enrollmentDate}, #{graduationDate}, #{status}, #{notes}, #{createTime}, #{updateTime}, #{createdBy})
+    </insert>
+
+    <update id="update" parameterType="com.example.cms.modules.population.entity.Education">
+        UPDATE education
+        SET resident_id=#{residentId}, resident_name=#{residentName}, id_card=#{idCard}, school_name=#{schoolName}, education_level=#{educationLevel}, major=#{major}, 
+            enrollment_date=#{enrollmentDate}, graduation_date=#{graduationDate}, status=#{status}, notes=#{notes}, update_time=#{updateTime}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM education WHERE id = #{id}
+    </delete>
+
+    <select id="findByResidentId" resultMap="EducationMap">
+        SELECT * FROM education WHERE resident_id = #{residentId} ORDER BY id ASC
+    </select>
+    
+    <select id="findByResidentIdCard" resultMap="EducationMap">
+        SELECT * FROM education WHERE id_card = #{idCard} ORDER BY id ASC
+    </select>
+    
+    <select id="search" resultMap="EducationMap">
+        SELECT * FROM education
+        <where>
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="schoolName != null and schoolName != ''">
+                AND school_name LIKE CONCAT('%', #{schoolName}, '%')
+            </if>
+        </where>
+        ORDER BY id ASC
+        <if test="size != null">
+            LIMIT #{size} OFFSET #{offset}
+        </if>
+    </select>
+    
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM education
+    </select>
+    
+    <select id="findByCreatedBy" resultMap="EducationMap">
+        SELECT * FROM education WHERE created_by = #{createdBy} ORDER BY id ASC
+        <if test="size != null">
+            LIMIT #{size} OFFSET #{offset}
+        </if>
+    </select>
+    
+    <select id="countByCreatedBy" resultType="int">
+        SELECT COUNT(*) FROM education WHERE created_by = #{createdBy}
+    </select>
+    
+    <!-- 查询管理员和当前用户创建的教育记录，支持分页 -->
+    <select id="findByAdminOrCreatedBy" resultMap="EducationMap">
+        SELECT * FROM education WHERE created_by = 1 OR created_by = #{createdBy} ORDER BY id ASC
+        <if test="size != null">
+            LIMIT #{size} OFFSET #{offset}
+        </if>
+    </select>
+    
+    <!-- 统计管理员和当前用户创建的教育记录数量 -->
+    <select id="countByAdminOrCreatedBy" resultType="int">
+        SELECT COUNT(*) FROM education WHERE created_by = 1 OR created_by = #{createdBy}
+    </select>
+    
+    <!-- 获取教育表中的全局最大ID -->
+    <select id="getMaxId" resultType="long">
+        SELECT COALESCE(MAX(id), 0) FROM education
+    </select>
+    
+    <!-- 重新排序教育记录ID，确保ID连续 -->
+    <update id="reorderIds">
+        UPDATE education e
+        JOIN (
+            SELECT id, @new_id := @new_id + 1 AS new_id
+            FROM education, (SELECT @new_id := 0) AS tmp
+            ORDER BY id ASC
+        ) e2 ON e.id = e2.id
+        SET e.id = e2.new_id;
+    </update>
+    
+    <!-- 根据居民ID列表查询教育记录，支持分页 -->
+    <select id="findByResidentIds" resultMap="EducationMap">
+        SELECT * FROM education
+        WHERE resident_id IN
+        <foreach item="id" collection="residentIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        ORDER BY id ASC
+        <if test="size != null">
+            LIMIT #{size} OFFSET #{offset}
+        </if>
+    </select>
+    
+    <!-- 统计根据居民ID列表查询的教育记录数量 -->
+    <select id="countByResidentIds" resultType="int">
+        SELECT COUNT(*) FROM education
+        WHERE resident_id IN
+        <foreach item="id" collection="residentIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+</mapper>

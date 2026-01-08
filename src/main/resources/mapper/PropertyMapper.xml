@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cms.modules.population.mapper.PropertyMapper">
+    
+    <resultMap id="PropertyMap" type="com.example.cms.modules.population.entity.Property">
+        <id property="id" column="id"/>
+        <result property="residentId" column="resident_id"/>
+        <result property="residentName" column="resident_name"/>
+        <result property="idCard" column="id_card"/>
+        <result property="propertyType" column="property_type"/>
+        <result property="address" column="address"/>
+        <result property="area" column="area"/>
+        <result property="value" column="value"/>
+        <result property="propertyCertificate" column="property_certificate"/>
+        <result property="acquisitionDate" column="acquisition_date"/>
+        <result property="usageType" column="usage_type"/>
+        <result property="rooms" column="rooms"/>
+        <result property="notes" column="notes"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createdBy" column="created_by"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+        id, resident_id, resident_name, id_card, property_type, address, area, value, property_certificate, acquisition_date, usage_type, rooms, notes, create_time, update_time, created_by
+    </sql>
+    
+    <select id="findAll" resultMap="PropertyMap">
+        SELECT <include refid="Base_Column_List"/> FROM property
+    </select>
+    
+    <select id="findById" resultMap="PropertyMap">
+        SELECT <include refid="Base_Column_List"/> FROM property WHERE id = #{id}
+    </select>
+    
+    <select id="findByResidentId" resultMap="PropertyMap">
+        SELECT <include refid="Base_Column_List"/> FROM property WHERE resident_id = #{residentId}
+    </select>
+    
+    <insert id="insert">
+        INSERT INTO property(id, resident_id, resident_name, id_card, property_type, address, area, value, property_certificate, acquisition_date, usage_type, rooms, notes, create_time, update_time, created_by)
+        VALUES(#{id}, #{residentId}, #{residentName}, #{idCard}, #{propertyType}, #{address}, #{area}, #{value}, #{propertyCertificate}, #{acquisitionDate}, #{usageType}, #{rooms}, #{notes}, #{createTime}, #{updateTime}, #{createdBy})
+    </insert>
+    
+    <update id="update">
+        UPDATE property SET 
+            resident_id = #{residentId},
+            resident_name = #{residentName},
+            id_card = #{idCard},
+            property_type = #{propertyType},
+            address = #{address},
+            area = #{area},
+            value = #{value},
+            property_certificate = #{propertyCertificate},
+            acquisition_date = #{acquisitionDate},
+            usage_type = #{usageType},
+            rooms = #{rooms},
+            notes = #{notes},
+            update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="deleteById">
+        DELETE FROM property WHERE id = #{id}
+    </delete>
+    
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM property
+    </select>
+    
+    <select id="search" resultMap="PropertyMap">
+        SELECT <include refid="Base_Column_List"/> FROM property
+        <where>
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="propertyType != null and propertyType != ''">
+                AND property_type = #{propertyType}
+            </if>
+            <if test="usageType != null and usageType != ''">
+                AND usage_type = #{usageType}
+            </if>
+            <if test="address != null and address != ''">
+                AND address LIKE CONCAT('%', #{address}, '%')
+            </if>
+        </where>
+    </select>
+    
+    <select id="searchWithPagination" resultMap="PropertyMap">
+        SELECT <include refid="Base_Column_List"/> FROM property
+        <where>
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="propertyType != null and propertyType != ''">
+                AND property_type = #{propertyType}
+            </if>
+            <if test="usageType != null and usageType != ''">
+                AND usage_type = #{usageType}
+            </if>
+            <if test="address != null and address != ''">
+                AND address LIKE CONCAT('%', #{address}, '%')
+            </if>
+        </where>
+        LIMIT #{offset}, #{size}
+    </select>
+    
+    <select id="countBySearch" resultType="int">
+        SELECT COUNT(*) FROM property
+        <where>
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="propertyType != null and propertyType != ''">
+                AND property_type = #{propertyType}
+            </if>
+            <if test="usageType != null and usageType != ''">
+                AND usage_type = #{usageType}
+            </if>
+            <if test="address != null and address != ''">
+                AND address LIKE CONCAT('%', #{address}, '%')
+            </if>
+        </where>
+    </select>
+    
+    <select id="searchByCreatedBy" resultMap="PropertyMap">
+        SELECT <include refid="Base_Column_List"/> FROM property
+        <where>
+            created_by = #{createdBy}
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="propertyType != null and propertyType != ''">
+                AND property_type = #{propertyType}
+            </if>
+            <if test="usageType != null and usageType != ''">
+                AND usage_type = #{usageType}
+            </if>
+            <if test="address != null and address != ''">
+                AND address LIKE CONCAT('%', #{address}, '%')
+            </if>
+        </where>
+        LIMIT #{offset}, #{size}
+    </select>
+    
+    <select id="countByCreatedByAndSearch" resultType="int">
+        SELECT COUNT(*) FROM property
+        <where>
+            created_by = #{createdBy}
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="propertyType != null and propertyType != ''">
+                AND property_type = #{propertyType}
+            </if>
+            <if test="usageType != null and usageType != ''">
+                AND usage_type = #{usageType}
+            </if>
+            <if test="address != null and address != ''">
+                AND address LIKE CONCAT('%', #{address}, '%')
+            </if>
+        </where>
+    </select>
+    
+    <!-- 根据管理员和创建者ID及搜索条件分页搜索房产信息 -->
+    <select id="searchByAdminOrCreatedBy" resultMap="PropertyMap">
+        SELECT <include refid="Base_Column_List"/> FROM property
+        <where>
+            created_by = 1 OR created_by = #{createdBy}
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="propertyType != null and propertyType != ''">
+                AND property_type = #{propertyType}
+            </if>
+            <if test="usageType != null and usageType != ''">
+                AND usage_type = #{usageType}
+            </if>
+            <if test="address != null and address != ''">
+                AND address LIKE CONCAT('%', #{address}, '%')
+            </if>
+        </where>
+        LIMIT #{offset}, #{size}
+    </select>
+    
+    <!-- 根据管理员和创建者ID及搜索条件统计记录数 -->
+    <select id="countByAdminOrCreatedByAndSearch" resultType="int">
+        SELECT COUNT(*) FROM property
+        <where>
+            created_by = 1 OR created_by = #{createdBy}
+            <if test="residentName != null and residentName != ''">
+                AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+            </if>
+            <if test="propertyType != null and propertyType != ''">
+                AND property_type = #{propertyType}
+            </if>
+            <if test="usageType != null and usageType != ''">
+                AND usage_type = #{usageType}
+            </if>
+            <if test="address != null and address != ''">
+                AND address LIKE CONCAT('%', #{address}, '%')
+            </if>
+        </where>
+    </select>
+    
+    <!-- 获取房产表中的全局最大ID -->
+    <select id="getMaxId" resultType="long">
+        SELECT COALESCE(MAX(id), 0) FROM property
+    </select>
+    
+    <!-- 重新排序房产记录ID，确保ID连续 -->
+    <update id="reorderIds">
+        UPDATE property p
+        JOIN (
+            SELECT id, @new_id := @new_id + 1 AS new_id
+            FROM property, (SELECT @new_id := 0) AS tmp
+            ORDER BY id ASC
+        ) p2 ON p.id = p2.id
+        SET p.id = p2.new_id;
+    </update>
+    
+    <!-- 根据居民ID列表和搜索条件分页查询房产信息 -->
+    <select id="searchByResidentIdsAndSearchConditions" resultMap="PropertyMap">
+        SELECT <include refid="Base_Column_List"/> FROM property
+        WHERE resident_id IN
+        <foreach collection="residentIds" item="residentId" open="(" separator="," close=")">
+            #{residentId}
+        </foreach>
+        <if test="residentName != null and residentName != ''">
+            AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+        </if>
+        <if test="propertyType != null and propertyType != ''">
+            AND property_type = #{propertyType}
+        </if>
+        <if test="usageType != null and usageType != ''">
+            AND usage_type = #{usageType}
+        </if>
+        <if test="address != null and address != ''">
+            AND address LIKE CONCAT('%', #{address}, '%')
+        </if>
+        LIMIT #{offset}, #{size}
+    </select>
+    
+    <!-- 根据居民ID列表和搜索条件统计房产信息数量 -->
+    <select id="countByResidentIdsAndSearchConditions" resultType="int">
+        SELECT COUNT(*) FROM property
+        WHERE resident_id IN
+        <foreach collection="residentIds" item="residentId" open="(" separator="," close=")">
+            #{residentId}
+        </foreach>
+        <if test="residentName != null and residentName != ''">
+            AND resident_name LIKE CONCAT('%', #{residentName}, '%')
+        </if>
+        <if test="propertyType != null and propertyType != ''">
+            AND property_type = #{propertyType}
+        </if>
+        <if test="usageType != null and usageType != ''">
+            AND usage_type = #{usageType}
+        </if>
+        <if test="address != null and address != ''">
+            AND address LIKE CONCAT('%', #{address}, '%')
+        </if>
+    </select>
+    
+</mapper>

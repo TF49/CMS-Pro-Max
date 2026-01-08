@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#6750A4</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="primary_container">#EADDFF</color>
+    <color name="on_primary_container">#21005D</color>
+
+    <color name="secondary">#625B71</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="secondary_container">#E8DEF8</color>
+    <color name="on_secondary_container">#1D192B</color>
+
+    <color name="tertiary">#7D5260</color>
+    <color name="on_tertiary">#FFFFFF</color>
+
+    <color name="error">#B3261E</color>
+    <color name="on_error">#FFFFFF</color>
+
+    <color name="background">#FEF7FF</color>
+    <color name="on_background">#1D1B20</color>
+    <color name="surface">#FEF7FF</color>
+    <color name="on_surface">#1D1B20</color>
+    <color name="surface_variant">#E7E0EC</color>
+    <color name="on_surface_variant">#49454F</color>
+    <color name="outline">#79747E</color>
+
+    <!-- Specific menu colors from image -->
+    <color name="menu_household">#6750A4</color>
+    <color name="menu_resident">#7E7490</color>
+    <color name="menu_education">#8E6EAD</color>
+    <color name="menu_medical">#006B5E</color>
+    <color name="menu_employment">#904D00</color>
+    <color name="menu_social_security">#B3261E</color>
+    <color name="menu_vehicle">#006495</color>
+    <color name="menu_property">#386A20</color>
+
+    <color name="text_primary">#1D1B20</color>
+    <color name="text_secondary">#49454F</color>
+    <color name="text_hint">#79747E</color>
+    <color name="border">#CAC4D0</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>
